@@ -236,7 +236,7 @@ public class SampleEndpoint {
         //add reuqest header
         con.setRequestMethod("POST");
 
-        String urlParameters  ="calendarId=vojin.pupavac@full.co&"+
+        String urlParameters  = "calendarId=vojin.pupavac@full.co&"+
                 "client_id=308935464098-60g3jmr7vcnc151bi8mq0pm1s8smddlq.apps.googleusercontent.com&"+
                 "client_secret=EwQgnFRMVJXJm21v17XCIifw&"+
                 "grant_type=authorization_code&"+
