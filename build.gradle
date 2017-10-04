@@ -1,0 +1,48 @@
+
+apply from: 'gradle/dependencies.gradle'
+
+
+/** project configurations **/
+allprojects {
+    group 'com.calendar'
+    version '1.0'
+
+
+    // ./gradlew <task> (on Unix-like platforms such as Linux and Mac OS X)
+    // gradlew <task> (on Windows using the gradlew.bat batch file)
+    task wrapper(type: Wrapper) {
+        gradleVersion = '3.5'
+    }
+}
+
+subprojects {
+
+    apply plugin: "java"  /// java is a short name for JavaPlugin class registration and this is a binary plugin
+    apply plugin: 'idea'
+
+
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+    repositories {  // repositories for Jar's you access in your code
+        maven {
+            url 'https://maven-central.storage.googleapis.com'
+//            url 'https://oss.sonatype.org/content/repositories/snapshots' // SNAPSHOT Repository (if needed)
+        }
+        jcenter()
+        mavenCentral()
+        mavenLocal()
+    }
+
+
+    dependencies {
+        compile libs.objectify
+        compile libs.jackson
+        compile libs.slf4jLog4j12
+
+        compileOnly libs.lombok
+
+        testCompile libs.junit
+
+    }
+}

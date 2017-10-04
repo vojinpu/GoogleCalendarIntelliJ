@@ -1,0 +1,58 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin:'war'
+apply plugin:'com.google.cloud.tools.appengine' // This will include all google appengine tasks like appengineRun, appengineUpdate etc.
+group 'com.calendar.backend'
+version '1.0'
+
+mainClassName = 'Quickstart'
+buildscript {
+    repositories {
+
+        jcenter()  // Pre configured repository that looks for dependencies in Bintray's JCenter.
+        mavenCentral() // Pre configured repository that looks for dependencies in Maven Central.
+    }
+    dependencies {
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:1.3.2'
+    }
+
+}
+
+dependencies {
+    providedCompile libs.servletApi
+    compile libs.gae
+    compile libs.resteasy
+    compile libs.resteasy_jackson_provider
+
+
+    compile 'com.google.api-client:google-api-client:1.22.0'
+    compile 'com.google.oauth-client:google-oauth-client-jetty:1.22.0'
+    compile 'com.google.apis:google-api-services-calendar:v3-rev254-1.22.0'
+    compile 'com.google.appengine:appengine-api-labs:1.7.4'
+
+}
+
+appengine {
+    run {
+        port = config.gae.port.backend // defined in dependencies.gre
+        storagePath = file("$projectDir/appengine-generated/")
+//        jvmFlags = config.gae.defaultJvmFlags
+    }
+
+    deploy {
+        version = 1
+        project = "double-aleph-181009"
+        stopPreviousVersion = false
+        promote = false
+    }
+}
+
+
+task reloadApp(type: Copy) {
+    dependsOn war
+
+    project.afterEvaluate {
+        into project.tasks.explodeWar.explodedAppDirectory
+        with war
+    }
+}

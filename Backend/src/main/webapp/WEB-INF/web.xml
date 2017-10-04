@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+
+    <!--Cron Confriguration-->
+
+
+    <servlet>
+        <servlet-name>Cron</servlet-name>
+        <servlet-class>com.calendar.config.Cron</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>Cron</servlet-name>
+
+        <url-pattern>/cron</url-pattern>
+    </servlet-mapping>
+
+    <!--End Cron Configurations-->
+
+
+    <!-- Objectify Filter -->
+    <filter>
+        <filter-name>ObjectifyFilter</filter-name>
+        <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ObjectifyFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- Objectify Filter End -->
+
+    <!-- Context Listener -->
+    <listener>
+        <listener-class>
+            com.calendar.config.OfyRegistration
+        </listener-class>
+    </listener>
+    <!-- Context Listener End -->
+
+    <!-- restEasy configurations -->
+    <context-param>
+        <param-name>resteasy.servlet.mapping.prefix</param-name>
+        <param-value>/*</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>RESTEasyService</servlet-name>
+        <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
+        </servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>com.calendar.config.ApiConfig</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RESTEasyService</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- restEasy configuration end -->
+
+
+
+
+    <!-- End Configurations -->
+
+</web-app>
