@@ -24,11 +24,6 @@ public class Cron extends HttpServlet{
 
 		System.out.println("Cron job, current time: " + cal.getTime().toString() + "-------------------------------------------------------------------------------------------------------->>");
 
-//		Queue queue = QueueFactory.getDefaultQueue();
-//		queue.add(TaskOptions.Builder.withUrl("/api/v1/notification").param("key", "voja"));
-//		queue.add(TaskOptions.Builder.withUrl("/api/v1/notification").param("key", "voja").method(TaskOptions.Method.GET));
-//		queue.add(TaskOptions.Builder.withUrl("/api/v1/notification").param("delete", "voja").method(TaskOptions.Method.DELETE));
-
 	}
 
 }
