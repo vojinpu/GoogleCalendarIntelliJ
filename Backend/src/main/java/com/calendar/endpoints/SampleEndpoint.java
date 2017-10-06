@@ -194,34 +194,18 @@ public class SampleEndpoint {
     }
 
 
-    //Here we are opening connection. We should handle what to do when our calendar has some changes. 
+    //Here we are opening connection. We should handle what to do when our calendar has some changes.
     private void createWatch(String access_token) throws Exception{
 
         String url = "https://www.googleapis.com/calendar/v3/calendars/vojin.pupavac@full.co/events/watch";
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-//        String urlParameters  = "calendarId=vojin.pupavac@full.co&"+
-//                "client_id=1070546990442-r21ln2vhlf966lt6o3r6s81egv545tl3.apps.googleusercontent.com&"+
-//                "client_secret=5EyoEJI5rIalYMQK6Y6thiWj&"+
-//                "access_token="+ access_token + "&" +
-//                "type=web_hook&"+
-//                "address=https://double-aleph-181009.appspot.com/api/v1/xxx&" +
-//                "id=6c84fb9s-12c4-11e1-840d-7b25c5ee7757";
-
         con.setRequestProperty("Content-Type", "application/json");
         con.setRequestProperty("Authorization", "Bearer "+access_token);
 
         con.setRequestMethod("POST");
         con.setDoOutput(true);
-
-
-
-        // Send post request
-//        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-//        wr.writeBytes(urlParameters);
-//        wr.flush();
-//        wr.close();
 
         OutputStream os = con.getOutputStream();
         OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
@@ -243,15 +227,8 @@ public class SampleEndpoint {
         con.connect();
 
 
-
-
-
-
-
-
         int responseCode = con.getResponseCode();
         System.out.println("\nSending 'POST' request to URL : " + url);
-//        System.out.println("Post parameters : " + urlParameters);
         System.out.println("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(
@@ -266,10 +243,6 @@ public class SampleEndpoint {
 
         //print result
         System.out.println(response.toString());
-
-
-
-
 
     }
 
